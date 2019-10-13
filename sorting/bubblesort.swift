@@ -3,20 +3,17 @@ import Shared  // ../shared
 
 extension Array where Element: Comparable {
     mutating func bubbleSort(verbose: Bool = false) {
-        if verbose {
-            print("Array before sort: \(self)")
-        }
+        var passCount = 0
+        self.preSortPrint(verbose)
         for i in (1...self.count).reversed() {
-            self.onePass(startIndex: 1, endIndex: i)
+            passCount += self.onePass(startIndex: 1, endIndex: i)
         }
-        if verbose {
-            print("Array after sort: \(self)")
-            print("isSorted: \(self.isSorted)")
-            print("")
-        }
+        self.postSortPrint(verbose, passCount: passCount)
     }
-    private mutating func onePass(startIndex: Int, endIndex: Int) {
+    private mutating func onePass(startIndex: Int, endIndex: Int) -> Int {
+        var passCount = 0
         for i in startIndex..<endIndex {
+            passCount += 1
             let lastVal = self[i-1]
             let curVal = self[i]
 
@@ -24,6 +21,7 @@ extension Array where Element: Comparable {
                 swap(i-1, i)
             }
         }
+        return passCount
     }
     private mutating func swap(_ ndx1: Int, _ ndx2: Int) {
         guard ndx1 >= 0 && ndx2 >= 0 else {
@@ -39,6 +37,7 @@ extension Array where Element: Comparable {
 }
 
 var a1 = [ 43,5 ,453,4, 63,42,4,3 ]
+a1.bubbleSort(verbose: true)
 a1.bubbleSort(verbose: true)
 
 var b: [Int] = (0..<100).map { _ in  .random(in: 0...100) }
