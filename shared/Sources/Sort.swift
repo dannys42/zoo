@@ -1,6 +1,10 @@
 import Rainbow
 
 public extension Array where Element: Comparable {
+    var isSortedText: String {
+        return (self.isSorted ? "true".green : "false".red).bold
+    }
+
     func preSortPrint(_ verbose: Bool) {
         guard verbose else { return }
 
@@ -10,8 +14,7 @@ public extension Array where Element: Comparable {
         guard verbose else { return }
 
         print("Array after sort: \(self)")
-        let isSorted = (self.isSorted ? "true".green : "false".red).bold
-        print("isSorted: \(isSorted)")
+        print("isSorted: \(isSortedText)")
         print("Performed: \(passCount) iterations for size \(self.count)")
         print("")
     }

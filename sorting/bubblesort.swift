@@ -23,17 +23,6 @@ extension Array where Element: Comparable {
         }
         return passCount
     }
-    private mutating func swap(_ ndx1: Int, _ ndx2: Int) {
-        guard ndx1 >= 0 && ndx2 >= 0 else {
-            return
-        }
-        guard ndx1 < self.count && ndx2 < self.count else {
-            return
-        }
-        let a = self[ndx1]
-        self[ndx1] = self[ndx2]
-        self[ndx2] = a
-    }
 }
 
 var a1 = [ 43,5 ,453,4, 63,42,4,3 ]
